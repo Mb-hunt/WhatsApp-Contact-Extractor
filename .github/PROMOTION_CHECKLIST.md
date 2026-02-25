@@ -5,16 +5,18 @@
 
 ---
 
-## 🟢 TIER 1 — GitHub Optimizations (Agent Can Do)
+## 🟢 TIER 1 — GitHub Optimizations
 
 - [x] Create comprehensive README.md
 - [x] Add MIT LICENSE
 - [x] Add .gitignore
 - [x] Push to GitHub
-- [ ] Add GitHub Topics/Tags (whatsapp, contact-extractor, marketing, javascript, etc.)
-- [ ] Add Social Preview image to repo
-- [ ] Create CONTRIBUTING.md
-- [ ] Add repo Description + Website on GitHub
+- [x] Add 18 GitHub Topics/Tags
+- [x] Set repo Description
+- [x] Create CONTRIBUTING.md
+- [x] Set repo Homepage URL
+- [x] Authenticate GitHub CLI
+- [ ] Add Social Preview image to repo *(image generator temporarily unavailable — do manually in repo Settings)*
 
 ---
 
