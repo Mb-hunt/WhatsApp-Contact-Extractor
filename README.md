@@ -7,6 +7,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-25D366.svg?style=for-the-badge)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-WhatsApp%20Web-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)]()
 [![JavaScript](https://img.shields.io/badge/Pure-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)]()
+[![GitHub stars](https://img.shields.io/github/stars/Mb-hunt/WhatsApp-Contact-Extractor?style=for-the-badge&color=yellow)](https://github.com/Mb-hunt/WhatsApp-Contact-Extractor/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Mb-hunt/WhatsApp-Contact-Extractor?style=for-the-badge&color=blue)](https://github.com/Mb-hunt/WhatsApp-Contact-Extractor/network)
 
 <br/>
 
@@ -18,6 +20,8 @@
 ---
 
 *Perfect for marketers, community managers, and growth hackers who need contact lists from WhatsApp groups — fast.*
+
+**Featured on:** [Product Hunt](https://www.producthunt.com/products/whatsapp-contact-extractor-2) · [DEV.to](https://dev.to/mbhunt/i-built-a-free-tool-to-extract-contacts-from-whatsapp-groups-291h) · [Hacker News](https://news.ycombinator.com/item?id=47155129) · [DevHunt](https://devhunt.org/tool/whatsapp-contact-extractor)
 
 </div>
 

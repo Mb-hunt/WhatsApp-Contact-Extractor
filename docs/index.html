@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Group Contact Extractor — Free Open Source Tool</title>
+    <meta name="description" content="Extract all contacts from any WhatsApp group in minutes. Free, open-source JavaScript tool. No installs, no extensions, 100% client-side. Download phone numbers, names, and contact status as a .tsv file.">
+    <meta name="keywords" content="WhatsApp, contact extractor, group contacts, WhatsApp Web, JavaScript, open source, free tool, export contacts, phone numbers, marketing, lead generation">
+    <meta name="author" content="Mb-hunt">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mb-hunt.github.io/WhatsApp-Contact-Extractor/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="WhatsApp Group Contact Extractor — Free & Open Source">
+    <meta property="og:description" content="Extract all contacts from any WhatsApp group in 2 minutes. No installs, no extensions. Just paste a script and get a downloadable .tsv file.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mb-hunt.github.io/WhatsApp-Contact-Extractor/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WhatsApp Group Contact Extractor">
+    <meta name="twitter:description" content="Free open-source tool to extract all contacts from WhatsApp groups. No extensions needed.">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "WhatsApp Group Contact Extractor",
+        "operatingSystem": "Web Browser",
+        "applicationCategory": "UtilitiesApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "A free, open-source JavaScript tool that extracts all contacts from WhatsApp Web groups. No extension needed — just paste a script in the browser console.",
+        "url": "https://github.com/Mb-hunt/WhatsApp-Contact-Extractor",
+        "license": "https://opensource.org/licenses/MIT",
+        "author": {
+            "@type": "Person",
+            "name": "Mb-hunt",
+            "url": "https://github.com/Mb-hunt"
+        }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --wa-green: #25D366;
+            --wa-dark: #075E54;
+            --wa-teal: #128C7E;
+            --bg-dark: #0a0f1a;
+            --bg-card: #111827;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #1e293b;
+            --glow: rgba(37, 211, 102, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(37, 211, 102, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(18, 140, 126, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(7, 94, 84, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Nav */
+        nav {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--wa-green);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .logo span { font-size: 1.4rem; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--wa-green); }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            color: var(--wa-green);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        h1 .highlight {
+            background: linear-gradient(135deg, var(--wa-green) 0%, #4ade80 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+        .cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--wa-green);
+            color: #000;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(37, 211, 102, 0.5);
+        }
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            border-color: var(--wa-green);
+            transform: translateY(-2px);
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            padding: 24px 0;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .trust-item span { font-size: 1.1rem; }
+
+        /* Steps */
+        .steps-section {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 48px;
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px 24px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            border-color: rgba(37, 211, 102, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .step-num {
+            display: inline-flex;
+            width: 36px; height: 36px;
+            align-items: center;
+            justify-content: center;
+            background: rgba(37, 211, 102, 0.15);
+            color: var(--wa-green);
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 10px;
+            margin-bottom: 16px;
+        }
+        .step-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .step-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Features */
+        .features-section {
+            padding: 60px 0 80px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .feature {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .feature:hover { background: rgba(255,255,255,0.02); }
+        .feature-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            width: 44px; height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(37, 211, 102, 0.1);
+            border-radius: 10px;
+        }
+        .feature h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .feature p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Use cases */
+        .use-cases {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .use-case {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .use-case:hover {
+            border-color: rgba(37, 211, 102, 0.3);
+            transform: translateY(-2px);
+        }
+        .use-case-icon { font-size: 2rem; margin-bottom: 12px; }
+        .use-case h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+        .use-case p { color: var(--text-secondary); font-size: 0.85rem; }
+
+        /* CTA */
+        .final-cta {
+            text-align: center;
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+        }
+        .final-cta h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .final-cta p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        footer a {
+            color: var(--wa-green);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero { padding: 48px 0 40px; }
+            .cta-group { flex-direction: column; align-items: center; }
+            .trust-bar { gap: 16px; }
+            nav { flex-direction: column; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="#" class="logo"><span>📱</span> WA Contact Extractor</a>
+            <div class="nav-links">
+                <a href="#how-it-works">How It Works</a>
+                <a href="#features">Features</a>
+                <a href="#use-cases">Use Cases</a>
+                <a href="https://github.com/Mb-hunt/WhatsApp-Contact-Extractor" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">⭐ Star on GitHub</a>
+            </div>
+        </nav>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="badge">✨ FREE & OPEN SOURCE — MIT LICENSED</div>
+            <h1>Extract All Contacts from<br>Any <span class="highlight">WhatsApp Group</span><br>in 2 Minutes</h1>
+            <p>No apps. No extensions. No sign-ups. Just paste a JavaScript snippet into your browser console on WhatsApp Web and download a clean spreadsheet with every member's phone number and name.</p>
+            <div class="cta-group">
+                <a href="https://github.com/Mb-hunt/WhatsApp-Contact-Extractor" class="btn btn-primary">
+                    📥 Get the Script — Free
+                </a>
+                <a href="https://github.com/Mb-hunt/WhatsApp-Contact-Extractor#-quick-start-5-minutes" class="btn btn-secondary">
+                    📖 Read the Docs
+                </a>
+            </div>
+            <div class="trust-bar">
+                <div class="trust-item"><span>🔒</span> 100% Client-Side</div>
+                <div class="trust-item"><span>🚫</span> Zero Dependencies</div>
+                <div class="trust-item"><span>📄</span> MIT Licensed</div>
+                <div class="trust-item"><span>⚡</span> Works in 2 Minutes</div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="steps-section" id="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">5 simple steps. No technical skills required.</p>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Open WhatsApp Web</h3>
+                    <p>Go to web.whatsapp.com and connect your WhatsApp account.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>Open the Members List</h3>
+                    <p>Open your group chat → click the group name → open the members panel.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Paste the Script</h3>
+                    <p>Press F12 → Console tab → paste the script from GitHub → hit Enter.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>Download Your File</h3>
+                    <p>Wait 1-3 minutes. A .tsv file auto-downloads with all contacts. Open in Excel or Google Sheets.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features-section" id="features">
+            <h2 class="section-title">Why This Tool?</h2>
+            <p class="section-subtitle">Built for privacy-conscious professionals who need results fast.</p>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <div>
+                        <h3>100% Private</h3>
+                        <p>Runs entirely in your browser. No data is ever sent to any server. Your contacts stay on your computer.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <div>
+                        <h3>Zero Setup</h3>
+                        <p>No installs, no extensions, no accounts. Just copy, paste, and run. Works in Chrome, Edge, Firefox, and Brave.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <div>
+                        <h3>Clean Output</h3>
+                        <p>Download a .tsv file with formatted phone numbers, saved names, display names, and contact status.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔓</div>
+                    <div>
+                        <h3>Fully Open Source</h3>
+                        <p>MIT licensed. Read every line of code. Fork it, modify it, contribute to it. No hidden anything.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <div>
+                        <h3>Handles Large Groups</h3>
+                        <p>Tested with groups of 1000+ members. Uses smart scrolling to load and extract every single contact.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>
+                    <div>
+                        <h3>Free Forever</h3>
+                        <p>No premium tier, no paywalls, no "upgrade to unlock". Free today, free tomorrow, free always.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases -->
+        <section class="use-cases" id="use-cases">
+            <h2 class="section-title">Perfect For</h2>
+            <p class="section-subtitle">Used by marketers, community managers, and networkers worldwide.</p>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <div class="use-case-icon">📣</div>
+                    <h3>Marketing Campaigns</h3>
+                    <p>Build targeted outreach lists from niche WhatsApp communities</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🤝</div>
+                    <h3>Networking</h3>
+                    <p>Save contacts from professional groups and events</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">📋</div>
+                    <h3>Community Management</h3>
+                    <p>Audit and track group membership over time</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">📈</div>
+                    <h3>Lead Generation</h3>
+                    <p>Capture prospects from industry-specific groups</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🗂️</div>
+                    <h3>CRM Import</h3>
+                    <p>Export contacts directly into your CRM or mailing list tool</p>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">🔄</div>
+                    <h3>Group Migration</h3>
+                    <p>Moving members between groups? Export first, then re-add</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final-cta">
+            <h2>Ready to Extract Your Contacts?</h2>
+            <p>Join hundreds of marketers and community managers using this tool every day.</p>
+            <div class="cta-group">
+                <a href="https://github.com/Mb-hunt/WhatsApp-Contact-Extractor" class="btn btn-primary">
+                    📥 Get Started — It's Free
+                </a>
+                <a href="https://github.com/Mb-hunt/WhatsApp-Contact-Extractor" class="btn btn-secondary">
+                    ⭐ Star on GitHub
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Built by <a href="https://github.com/Mb-hunt">Mb-hunt</a> · MIT Licensed · <a href="https://github.com/Mb-hunt/WhatsApp-Contact-Extractor">View on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>
