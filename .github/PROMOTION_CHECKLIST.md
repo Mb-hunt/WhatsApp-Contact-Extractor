@@ -1,7 +1,7 @@
 # 📋 Promotion Checklist — WhatsApp Group Contact Extractor
 
 > Track progress on listing this project across free directories and platforms.
-> Last updated: 2026-02-25
+> Last updated: 2026-02-26
 
 ---
 
@@ -16,33 +16,35 @@
 - [x] Create CONTRIBUTING.md
 - [x] Set repo Homepage URL
 - [x] Authenticate GitHub CLI
-- [ ] Add Social Preview image to repo *(image generator temporarily unavailable — do manually in repo Settings)*
+- [ ] Add Social Preview image to repo *(create at canva.com, upload in repo Settings → General → Social Preview)*
 
 ---
 
-## 🟡 TIER 2 — Quick Directory Submissions (< 5 min each)
+## ✅ COMPLETED — Successfully Submitted
 
-- [ ] **SourceForge** → [sourceforge.net](https://sourceforge.net) — Create project listing
-- [ ] **AlternativeTo** → [alternativeto.net](https://alternativeto.net) — Submit as free alternative
-- [ ] **DevHunt** → [devhunt.org](https://devhunt.org) — Launch with GitHub login
-- [ ] **CodeTriage** → [codetriage.com](https://www.codetriage.com) — Add repo
-- [ ] **Libraries.io** → [libraries.io](https://libraries.io) — Auto-indexes (just verify)
-- [ ] **Open Hub** → [openhub.net](https://www.openhub.net) — Register + add repo
-- [ ] **OpenAlternative** → [openalternative.co](https://openalternative.co) — Submit via form
+- [x] **Hacker News** → [Show HN post live](https://news.ycombinator.com/item?id=47155129)
+- [x] **DEV.to** → [Article published](https://dev.to/mbhunt/i-built-a-free-tool-to-extract-contacts-from-whatsapp-groups-291h)
+- [x] **CodeTriage** → [Repo added](https://www.codetriage.com/mb-hunt/whatsapp-contact-extractor)
+- [x] **OpenSourceAlternative.to** → Submitted, under review
 
 ---
 
-## 🔵 TIER 3 — Community Posts (High Impact)
+## ⚠️ PARTIALLY DONE — Requires Manual Completion
 
-- [ ] **Reddit r/opensource** → Post with description
-- [ ] **Reddit r/sideproject** → Share as side project
-- [ ] **Reddit r/webdev** → Post on Showoff Saturday
-- [ ] **Reddit r/javascript** → Share as pure JS tool
-- [ ] **Reddit r/whatsapp** → Share for WhatsApp users
-- [ ] **Hacker News** → "Show HN" post
-- [ ] **DEV.to** → Write tutorial article
-- [ ] **Product Hunt** → Launch as free tool
-- [ ] **Hashnode** → Write blog post
+- [ ] **DevHunt** → Form is pre-filled, logged in. Needs logo + 3 screenshots uploaded → [devhunt.org](https://devhunt.org)
+- [ ] **Product Hunt** → GitHub auth done, blocked by CAPTCHA → [producthunt.com](https://www.producthunt.com) *(log in, complete CAPTCHA, then submit)*
+
+---
+
+## 📝 TODO — Manual Submissions Required (CAPTCHA-protected)
+
+- [ ] **Reddit r/opensource** → [Submit post](https://www.reddit.com/r/opensource/submit) *(draft #2 in SUBMISSION_DRAFTS.md)*
+- [ ] **Reddit r/sideproject** → [Submit post](https://www.reddit.com/r/sideproject/submit) *(draft #3)*
+- [ ] **Reddit r/webdev** → Post on Showoff Saturday *(draft #4)*
+- [ ] **Reddit r/javascript** → [Submit post](https://www.reddit.com/r/javascript/submit) *(draft #5)*
+- [ ] **Reddit r/whatsapp** → [Submit post](https://www.reddit.com/r/whatsapp/submit) *(draft #6)*
+- [ ] **AlternativeTo** → [alternativeto.net](https://alternativeto.net) *(Cloudflare protected, must do manually)*
+- [ ] **Hashnode** → [hashnode.com](https://hashnode.com) *(draft #13)*
 
 ---
 
