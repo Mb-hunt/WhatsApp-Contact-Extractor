@@ -26,13 +26,8 @@
 - [x] **DEV.to** → [Article published](https://dev.to/mbhunt/i-built-a-free-tool-to-extract-contacts-from-whatsapp-groups-291h)
 - [x] **CodeTriage** → [Repo added](https://www.codetriage.com/mb-hunt/whatsapp-contact-extractor)
 - [x] **OpenSourceAlternative.to** → Submitted, under review
-
----
-
-## ⚠️ PARTIALLY DONE — Requires Manual Completion
-
-- [ ] **DevHunt** → Form is pre-filled, logged in. Needs logo + 3 screenshots uploaded → [devhunt.org](https://devhunt.org)
-- [ ] **Product Hunt** → GitHub auth done, blocked by CAPTCHA → [producthunt.com](https://www.producthunt.com) *(log in, complete CAPTCHA, then submit)*
+- [x] **DevHunt** → [Tool page live](https://devhunt.org/tool/whatsapp-contact-extractor)
+- [x] **Product Hunt** → [Product page live](https://www.producthunt.com/products/whatsapp-contact-extractor-2) *(scheduled launch Feb 26, 2026)*
 
 ---
 
