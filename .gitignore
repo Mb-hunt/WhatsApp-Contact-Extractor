@@ -15,3 +15,8 @@ Desktop.ini
 
 # Gemini
 .gemini/
+
+# Personal / temp files
+*.docx
+*.doc
+pages_config.json
